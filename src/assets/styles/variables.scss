@@ -1,0 +1,119 @@
+// ==========================================
+// SCSS 全局变量定义
+// 城市POI可视化与分析平台
+// ==========================================
+
+// ---------- 主题色 ----------
+$primary-color: #409EFF;       // 主题蓝色
+$primary-color-light: #66b1ff; // 主题蓝色-浅
+$primary-color-dark: #3a8ee6;  // 主题蓝色-深
+$success-color: #67C23A;       // 成功绿色
+$warning-color: #E6A23C;       // 警告橙色
+$danger-color: #F56C6C;        // 危险红色
+$info-color: #909399;          // 信息灰色
+
+// ---------- 文字颜色 ----------
+$text-primary: #303133;        // 主要文字
+$text-regular: #606266;        // 常规文字
+$text-secondary: #909399;      // 次要文字
+$text-placeholder: #C0C4CC;    // 占位文字
+
+// ---------- 背景色 ----------
+$bg-color: #F5F7FA;            // 页面背景
+$bg-white: #FFFFFF;            // 白色背景
+$bg-dark: #1D1E1F;             // 深色背景
+$bg-hover: #ECF5FF;            // 悬停背景
+
+// ---------- 边框 ----------
+$border-color: #DCDFE6;        // 边框颜色
+$border-light: #E4E7ED;        // 浅色边框
+$border-lighter: #EBEEF5;      // 更浅边框
+$border-radius: 4px;           // 默认圆角
+$border-radius-lg: 8px;        // 大圆角
+$border-radius-xl: 12px;       // 超大圆角
+
+// ---------- 布局 ----------
+$header-height: 60px;          // 顶部导航高度
+$sidebar-width: 300px;         // 侧边栏宽度
+$sidebar-width-sm: 260px;      // 小屏幕侧边栏宽度
+$sidebar-collapsed-width: 64px;// 侧边栏折叠宽度
+
+// ---------- 阴影 ----------
+$box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+$box-shadow-light: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+$box-shadow-hover: 0 4px 16px 0 rgba(0, 0, 0, 0.12);
+$box-shadow-card: 0 1px 3px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+// ---------- POI 分类颜色 ----------
+$poi-food-color: #F56C6C;          // 餐饮 - 红色
+$poi-hotel-color: #E6A23C;         // 住宿 - 橙色
+$poi-transport-color: #409EFF;     // 交通 - 蓝色
+$poi-shopping-color: #67C23A;      // 购物 - 绿色
+$poi-education-color: #909399;     // 教育 - 灰色
+$poi-medical-color: #B37FEB;       // 医疗 - 紫色
+
+// ---------- 地图相关 ----------
+$map-controls-zindex: 10;          // 地图控件层级
+$popup-zindex: 100;                // 弹出层层级
+$overlay-zindex: 200;              // 覆盖物层级
+
+// ---------- 过渡 ----------
+$transition-duration: 0.3s;        // 默认过渡时间
+$transition-fast: 0.15s;           // 快速过渡
+$transition-slow: 0.5s;            // 慢速过渡
+
+// ---------- 动画 ----------
+$ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+$ease-out: cubic-bezier(0, 0, 0.2, 1);
+$ease-in: cubic-bezier(0.4, 0, 1, 1);
+$ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+// ---------- 响应式断点 ----------
+$breakpoint-xs: 480px;
+$breakpoint-sm: 768px;
+$breakpoint-md: 992px;
+$breakpoint-lg: 1200px;
+$breakpoint-xl: 1400px;
+
+// ---------- 混入 ----------
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == xs {
+    @media (max-width: $breakpoint-xs) { @content; }
+  } @else if $breakpoint == sm {
+    @media (max-width: $breakpoint-sm) { @content; }
+  } @else if $breakpoint == md {
+    @media (max-width: $breakpoint-md) { @content; }
+  } @else if $breakpoint == lg {
+    @media (max-width: $breakpoint-lg) { @content; }
+  } @else if $breakpoint == xl {
+    @media (max-width: $breakpoint-xl) { @content; }
+  }
+}
+
+// ---------- 动画混入 ----------
+@mixin fade-in {
+  animation: fadeIn $transition-duration $ease-out;
+}
+
+@mixin slide-up {
+  animation: slideUp $transition-duration $ease-out;
+}
+
+@mixin pulse {
+  animation: pulse 2s infinite;
+}
+
+@mixin hover-lift {
+  transition: transform $transition-fast $ease-out, box-shadow $transition-fast $ease-out;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $box-shadow-hover;
+  }
+}
+
+@mixin active-press {
+  &:active {
+    transform: translateY(0);
+  }
+}

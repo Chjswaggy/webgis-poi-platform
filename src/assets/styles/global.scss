@@ -1,0 +1,425 @@
+// ==========================================
+// 全局样式
+// 城市POI可视化与分析平台
+// ==========================================
+
+// ---------- 重置样式 ----------
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB',
+    'Microsoft YaHei', Arial, sans-serif;
+  font-size: 14px;
+  color: $text-primary;
+  background-color: $bg-color;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+}
+
+// ---------- 动画关键帧 ----------
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+// ---------- 滚动条样式 ----------
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(144, 147, 153, 0.3);
+  border-radius: 3px;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(144, 147, 153, 0.5);
+  }
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+// ---------- 通用工具类 ----------
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.text-ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+// 动画类
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity $transition-duration $ease-out;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all $transition-duration $ease-out;
+}
+
+.slide-up-enter-from,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+// ---------- 链接样式 ----------
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $primary-color-dark;
+    text-decoration: underline;
+  }
+}
+
+// ---------- Element Plus 覆盖 ----------
+.el-card {
+  border-radius: $border-radius-lg;
+  border: none;
+  box-shadow: $box-shadow-light;
+  transition: box-shadow $transition-fast;
+
+  &:hover {
+    box-shadow: $box-shadow;
+  }
+}
+
+.el-button {
+  border-radius: $border-radius;
+  transition: all $transition-fast $ease-out;
+
+  &:hover {
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.el-button--primary {
+  box-shadow: 0 2px 8px rgba(64, 158, 255, 0.3);
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(64, 158, 255, 0.4);
+  }
+}
+
+.el-input__wrapper {
+  border-radius: $border-radius;
+  transition: all $transition-fast;
+}
+
+.el-select__wrapper {
+  border-radius: $border-radius;
+}
+
+.el-tag {
+  border-radius: $border-radius;
+}
+
+// ---------- 地图容器通用样式 ----------
+.map-container {
+  width: 100%;
+  height: 100%;
+
+  .ol-control {
+    border-radius: $border-radius;
+    box-shadow: $box-shadow-light;
+    transition: all $transition-fast;
+
+    &:hover {
+      box-shadow: $box-shadow;
+    }
+  }
+
+  // 隐藏 OpenLayers 默认的 attribution
+  .ol-attribution {
+    display: none;
+  }
+
+  // 缩放控件样式
+  .ol-zoom {
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+
+    button {
+      transition: background-color $transition-fast;
+    }
+  }
+}
+
+// ---------- POI 弹窗样式 ----------
+.poi-popup {
+  position: absolute;
+  min-width: 220px;
+  max-width: 300px;
+  background: $bg-white;
+  border-radius: $border-radius-lg;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  z-index: $popup-zindex;
+  display: none;
+  animation: slideUp $transition-duration $ease-out;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid $bg-white;
+  }
+
+  .poi-popup-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-bottom: 1px solid $border-light;
+
+    .poi-popup-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .poi-popup-name {
+      flex: 1;
+      font-size: 15px;
+      font-weight: 600;
+      color: $text-primary;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .poi-popup-close {
+      width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      background: transparent;
+      color: $text-secondary;
+      font-size: 18px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: all $transition-fast;
+
+      &:hover {
+        background: $bg-color;
+        color: $text-primary;
+        transform: rotate(90deg);
+      }
+    }
+  }
+
+  .poi-popup-body {
+    padding: 12px 16px;
+
+    .poi-popup-category {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+
+    .poi-popup-address {
+      font-size: 12px;
+      color: $text-secondary;
+      line-height: 1.6;
+    }
+  }
+}
+
+// ---------- 加载动画 ----------
+.loading-mask {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(2px);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid $border-light;
+  border-top-color: $primary-color;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+// ---------- 骨架屏 ----------
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $bg-color 25%,
+    $border-lighter 50%,
+    $bg-color 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: $border-radius;
+}
+
+// ---------- 响应式调整 ----------
+@media (max-width: $breakpoint-lg) {
+  .side-panel {
+    width: $sidebar-width-sm !important;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .home-view {
+    flex-direction: column;
+  }
+
+  .side-panel {
+    width: 100% !important;
+    height: auto !important;
+    max-height: 200px;
+  }
+
+  .map-wrapper {
+    height: calc(100% - 400px);
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .panel-section {
+    padding: 12px !important;
+  }
+
+  .panel-title {
+    font-size: 13px !important;
+  }
+
+  .stat-value {
+    font-size: 20px !important;
+  }
+}
