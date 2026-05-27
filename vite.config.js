@@ -2,11 +2,11 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import { resolve } from 'path'
 
-// GitHub Pages deployment configuration
-const repoName = 'webgis-poi-platform' // 替换为你的仓库名称
-
 // https://vitejs.dev/config/
 export default defineConfig({
+  // GitHub Pages 部署配置 - 使用仓库名称作为基础路径
+  base: '/webgis-poi-platform/',
+  
   plugins: [vue()],
   resolve: {
     alias: {
@@ -26,8 +26,6 @@ export default defineConfig({
     open: true
   },
   build: {
-    // GitHub Pages 部署时使用相对路径
-    base: './',
     // 构建优化：手动分包，分离大型第三方库
     rollupOptions: {
       output: {
