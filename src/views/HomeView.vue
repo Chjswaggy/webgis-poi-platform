@@ -736,21 +736,22 @@ onMounted(async () => {
   // 加载 POI 数据
   await loadPois()
 
-  // 等待 DOM 更新后初始化
-  await nextTick()
-
-  // 初始化 POI 图层
-  initPOILayer()
-
   // 初始化图表
   initPieChart()
   initBarChart()
-
-  // 初始渲染 POI 到地图
-  if (filteredPois.value.length > 0) {
-    renderPOIs(filteredPois.value)
-  }
 })
+
+// 监听地图就绪状态，初始化 POI 图层
+watch(isMapReady, (ready) => {
+  if (ready) {
+    console.log('地图已就绪，初始化 POI 图层')
+    initPOILayer()
+    // 初始渲染 POI 到地图
+    if (filteredPois.value.length > 0) {
+      renderPOIs(filteredPois.value)
+    }
+  }
+}, { immediate: true })
 
 // 监听 POI 数据变化，更新图表
 watch(
