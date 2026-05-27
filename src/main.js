@@ -20,6 +20,16 @@ import App from './App.vue'
 // 路由
 import router from './router'
 
+// GitHub Pages 404 回退重定向恢复
+// 如果是从 404.html 重定向过来的，恢复原始路径
+if (window.location.protocol !== 'file:' && sessionStorage.redirect) {
+  const redirect = sessionStorage.redirect;
+  delete sessionStorage.redirect;
+  if (redirect !== window.location.href) {
+    window.history.replaceState(null, null, redirect);
+  }
+}
+
 // 创建 Vue 应用实例
 const app = createApp(App)
 
