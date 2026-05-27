@@ -56,7 +56,7 @@ class PoiService {
    */
   static async fetchAllPois() {
     try {
-      const response = await fetch('/data/pois.json')
+      const response = await fetch(`${import.meta.env.BASE_URL}data/pois.json`)
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)
       }
